@@ -57,9 +57,12 @@ The data is split into 97% training, 2% validation, and 1% testing.  Since there
 | Xception           | Classic / 2017   | 299×299    | ~22.9M     | ~79.0%               | Medium             | Depthwise separable convs, efficient      |
 | ConvNeXtBase       | Next-Gen / 2022  | 224×224    | ~88M       | ~83.1%               | High memory usage  | Modern CNN rivaling ViT                   |
 
-Here is a quick comparison chart with each of these models:
+### Exploratory Data Analysis
+
+#### Image Resolutions
+
+First we took a look at image resolutions, just so that we can be familiar with all of the different sizes and ranges.  For this, we plotted the heights and widths on frequency charts.
+
+images/DistofImageHeights.png
 
 
-|
-
-## Summary of Conclusions
