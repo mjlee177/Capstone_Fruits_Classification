@@ -63,6 +63,42 @@ The data is split into 97% training, 2% validation, and 1% testing.  Since there
 
 First we took a look at image resolutions, just so that we can be familiar with all of the different sizes and ranges.  For this, we plotted the heights and widths on frequency charts.
 
-images/DistofImageHeights.png
+![Distribution of Image Heights](images/DistofImageHeights.png)
+
+![Distribution of Image Widthx](images/DistofImageWidths.png)
+
+#### Class Counts
+
+First, we produced a table to make sure the #s align with what we expect.  All looks good.
+
+| Category    | Train | Validation | Test | Total | Train % | Validation % | Test % |
+|-------------|-------|------------|------|--------|----------|---------------|--------|
+| Apple       | 1940  | 40         | 20   | 2000   | 97.0     | 2.0           | 1.0    |
+| Banana      | 1940  | 40         | 20   | 2000   | 97.0     | 2.0           | 1.0    |
+| Grape       | 1940  | 40         | 20   | 2000   | 97.0     | 2.0           | 1.0    |
+| Mango       | 1940  | 40         | 20   | 2000   | 97.0     | 2.0           | 1.0    |
+| Strawberry  | 1940  | 40         | 20   | 2000   | 97.0     | 2.0           | 1.0    |
+
+Next, we generated a pie chart containing each fruit.  Perfect 20% for each fruit.
+
+![Pie Chart for Training Images](images/Class_Dist_of_Training_Images.png)
+
+Finally, we generate bar chart counts to ensure each fruit has the proper # and %s for training, validation, and test data.  All looks good here as well.
+
+![Apple Distribution](images/Apple_distribution.png)
+
+![Banana Distribution](images/Banana_distribution.png)
+
+![Grape Distribution](images/Grape_distribution.png)
+
+![Mango Distribution](images/Mango_distribution.png)
+
+![Strawberry Distribution](images/Strawberry_distribution.png)
+
+### Modeling
+
+
+
+
 
 
