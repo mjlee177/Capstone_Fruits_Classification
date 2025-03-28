@@ -121,7 +121,7 @@ For the baseline model, we took a look at <i> [Deep Learning](https://www.amazon
  Trainable params: 9,370,181 (35.74 MB)
  Non-trainable params: 0 (0.00 B)
 
-The resulting training and validation accuracies and loss is shown below:
+The resulting training and validation accuracies and losses are shown below:
 
 ![Conv2D 256px Acc Loss](images/Conv2D_256_pix_Acc_Loss.png)
 
