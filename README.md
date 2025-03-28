@@ -23,20 +23,21 @@ The fruits classification dataset is from Kaggle.  It contains 10,000 images wit
 - strawberries
 
 The pictures are of various shapes, sizes, colors, and lighting conditions.  Some are pictures taken with a camera, some are computer generated, and some are drawn by hand.  All types of scenes and angles are taken of the fruits, including whole, sliced, peeled, bitten, plucked, on the tree/ vine, and arranged on dishes.  Some pictures even have false colors (like a blue apple) or are in black-and-white.  What is consistent among these images is that the fruits are true to shape, meaning there's no mashed banana, apple sauce, grape juice, or other byproducts.  If there is a picture of a byproduct (e.g. strawberry cake), the fruit is there as well.  Some images are of the full fruit, some are in bunches, some are only partially on the image or some of the fruit is not exactly true to shape because it's dipped in chocolate or something similar.<br>
-![Hand drawn apple](images/Apple (1).png)
-Hand drawn apple
-![Computer generated strawberry](https://github.com/mjlee177/Capstone_Fruits_Classification/blob/main/images/Apple%20(1).png)
-Computer generated strawberry
+
+![Hand drawn apple](images/Apple%20(1).png)
+Hand drawn apple<br>
+![Computer generated strawberry](images/Strawberry%20(883).jpeg)
+Computer generated strawberry<br>
 ![Sliced and arranged apples](images/Apple%20(21).jpeg)
-Sliced and arranged apples
+Sliced and arranged apples<br>
 ![Blue apple](images/Apple%20(80).jpeg)
-Blue apple
+Blue apple<br>
 ![Strawberry cake](images/Strawberry%20(132).jpeg)
-Strawberry cake
+Strawberry cake<br>
 ![Chocolate dipped strawberries](images/Strawberry%20(775).jpeg)
-Chocolate dipped strawberries
+Chocolate dipped strawberries<br>
 ![Banana mostly out of the picture](images/Banana%20(3071).jpeg)
-Banana mostly out of the picture
+Banana mostly out of the picture<br>
 
 The pictures have varying dimensions but all are 96 dpi vertical and horizontal resolution, have 24 bit depth, and are in jpeg format.
 
