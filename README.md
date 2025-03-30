@@ -319,12 +319,19 @@ Training On (50 epochs)
 
 ### 🍖💪📈📉 Backbone Models with Training Off/On, Loss and Accuracy
 
+MobileNetV2
 ![MobileNetV2 Acc Loss](images/MobileNetV2_Acc_Loss.png) ![MobileNetV2 Train_On_Acc Loss](images/MobileNetV2Train_On_Acc_Loss.png)
+EfficientNetV2B0
 ![EfficientNetV2B0 Acc Loss](images/EfficientNetV2B0_Acc_Loss.png) ![EfficientNetV2B0 Train_On_Acc Loss](images/EfficientNetV2B0Train_On_Acc_Loss.png)
+ResNet152V2
 ![ResNet152V2 Acc Loss](images/ResNet152V2_Acc_Loss.png) ![ResNet152V2 Train_On_Acc Loss](images/ResNet152V2Train_On_Acc_Loss.png)
+EfficientNetB7
 ![EfficientNetB7 Acc Loss](images/EfficientNetB7_Acc_Loss.png) ![EfficientNetB7 Train_On_Acc Loss](images/EfficientNetB7Train_On_Acc_Loss.png)
+InceptionV3
 ![InceptionV3 Acc Loss](images/InceptionV3_Acc_Loss.png) ![InceptionV3_Train_On Acc Loss](images/InceptionV3Train_On_Acc_Loss.png)
+Xception
 ![Xception Acc Loss](images/Xception_Acc_Loss.png) ![Xception Train_On_Acc Loss](images/XceptionTrain_On_Acc_Loss.png)
+ConvNeXtBase
 ![ConvNeXtBase Acc Loss](images/ConvNeXtBase_Acc_Loss.png) ![ConvNeXtBase_Train_On Acc Loss](images/ConvNeXtBaseTrain_On_Acc_Loss.png)
 
 ### 🍖💪👀 Backbones with Training Off/ On Insights
