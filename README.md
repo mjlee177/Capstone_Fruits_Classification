@@ -45,7 +45,7 @@ The data is split into 97% training, 2% validation, and 1% testing.  Since there
 
 ## Modeling Plan
 
- We will use a baseline model made up of Conv2D/Maxpooling2D layers and 7 pre-trained models.  Pre-trained models summary:
+ 🔢 We will use a baseline model made up of Conv2D/Maxpooling2D layers and 7 pre-trained models.  Pre-trained models summary:
 
  Model              | Gen / Year       | Input Size | Params (M) | ImageNet Top-1 Acc. | Speed / Size      | Best For                                 |
 |--------------------|------------------|------------|------------|----------------------|-------------------|-------------------------------------------|
@@ -69,7 +69,7 @@ First we took a look at image resolutions, just so that we can be familiar with 
 
 ### Class Counts
 
-First, we produced a table to make sure the #s align with what we expect.  All looks good.
+🔢 First, we produced a table to make sure the #s align with what we expect.  All looks good.
 
 | Category    | Train | Validation | Test | Total | Train % | Validation % | Test % |
 |-------------|-------|------------|------|--------|----------|---------------|--------|
@@ -132,7 +132,7 @@ Layers shown here:
  Trainable params: 9,370,181 (35.74 MB)
  Non-trainable params: 0 (0.00 B)
 
-The resulting training and validation accuracies and losses are shown below:
+📈📉 The resulting training and validation losses and accuracies are shown below:
 
 ![Conv2D 256px Acc Loss](images/Conv2D_256_pix_Acc_Loss.png)
 
@@ -181,7 +181,7 @@ Layers:
  Trainable params: 3,078,725 (11.74 MB)
  Non-trainable params: 0 (0.00 B)
 
- Accuracies and Loss:
+📈📉 Losses and accuracies:
 
  ![Conv2D 128px Acc Loss](images/Conv2D_128_pix_Acc_Loss.png)
 
@@ -201,7 +201,7 @@ We run each model in a loop with the following settings:
 - dropout = 0.5
 - epochs = 20
 
-We end up with this summary table:
+🔢 We end up with this summary table:
 
 | Model            | Max Train Accuracy | Median Train Accuracy | Max Val Accuracy | Median Val Accuracy | Training Time (min) |
 |------------------|--------------------|------------------------|------------------|----------------------|----------------------|
@@ -213,7 +213,7 @@ We end up with this summary table:
 | Xception         | 0.8882             | 0.8808                 | 0.905            | 0.8800               | 6.09                 |
 | ConvNeXtBase     | 0.7812             | 0.7703                 | 0.810            | 0.7925               | 15.09                |
 
-and these accuracy and loss plots:
+📈📉 Loss and accuracy plots:
 
 ![MobileNetV2 Acc Loss](images/MobileNetV2_Acc_Loss.png)
 ![EfficientNetV2B0 Acc Loss](images/EfficientNetV2B0_Acc_Loss.png)
@@ -270,7 +270,7 @@ The tuned MobileNetV2 model reached **96% test accuracy** with hyperparameters:
 - units = 384
 - learning rate = 0.0001
 
-Accuracy and loss plots:
+📈📉Loss and accuracy plots:
 
 ![Tuned MobileNetV2 Acc Loss](images/Tuned_MobileNet_Acc_Loss.png)
 
@@ -290,7 +290,44 @@ Settings:
 - optimizer = Adam
 - loss = sparse_categorical_crossentropy
 - dropout = 0.5
-- epochs = 20
+- **epochs = 50**
 
-  
+#### 🍖💪🔢 Backbones with Training Off/ On, Summary Tables
+
+Training Off (20 epochs)
+| Model            | Max Train Accuracy | Median Train Accuracy | Max Val Accuracy | Median Val Accuracy | Training Time (min) |
+|------------------|--------------------|------------------------|------------------|----------------------|----------------------|
+| MobileNetV2      | 0.8703             | 0.8628                 | 0.920            | 0.8950               | 4.80                 |
+| EfficientNetV2B0 | 0.2214             | 0.2100                 | 0.260            | 0.2175               | 5.02                 |
+| ResNet152V2      | 0.8778             | 0.8680                 | 0.905            | 0.8800               | 10.70                |
+| EfficientNetB7   | 0.2174             | 0.2061                 | 0.260            | 0.2125               | 17.73                |
+| InceptionV3      | 0.8657             | 0.8569                 | 0.905            | 0.8925               | 4.89                 |
+| Xception         | 0.8882             | 0.8808                 | 0.905            | 0.8800               | 6.09                 |
+| ConvNeXtBase     | 0.7812             | 0.7703                 | 0.810            | 0.7925               | 15.09                |
+
+Training On (50 epochs)
+
+| Model             | Max Train Accuracy | Median Train Accuracy | Max Val Accuracy | Median Val Accuracy | Training Time (min) |
+|-------------------|--------------------|------------------------|------------------|----------------------|----------------------|
+| MobileNetV2       | 0.9947             | 0.9785                 | 0.895            | 0.7725               | 12.18                |
+| EfficientNetV2B0  | 0.9940             | 0.9839                 | 0.500            | 0.2075               | 13.06                |
+| ResNet152V2       | 0.9978             | 0.9797                 | 0.815            | 0.7675               | 33.08                |
+| EfficientNetB7    | 0.9955             | 0.9852                 | 0.875            | 0.2550               | 53.64                |
+| InceptionV3       | 0.9948             | 0.9845                 | 0.910            | 0.8725               | 15.10                |
+| Xception          | 0.9954             | 0.9880                 | 0.920            | 0.8900               | 18.89                |
+| ConvNeXtBase      | 0.2077             | 0.2003                 | 0.200            | 0.2000               | 89.71                |
+
+### 🍖💪📈📉 Backbone Models with Training Off/On, Loss and Accuracy
+
+![MobileNetV2 Acc Loss](images/MobileNetV2_Acc_Loss.png) ![MobileNetV2 Train_On_Acc Loss](images/MobileNetV2Train_On_Acc_Loss.png)
+![EfficientNetV2B0 Acc Loss](images/EfficientNetV2B0_Acc_Loss.png) ![EfficientNetV2B0 Train_On_Acc Loss](images/EfficientNetV2B0Train_On_Acc_Loss.png)
+![ResNet152V2 Acc Loss](images/ResNet152V2_Acc_Loss.png) ![ResNet152V2 Train_On_Acc Loss](images/ResNet152V2Train_On_Acc_Loss.png)
+![EfficientNetB7 Acc Loss](images/EfficientNetB7_Acc_Loss.png) ![EfficientNetB7 Train_On_Acc Loss](images/EfficientNetB7Train_On_Acc_Loss.png)
+![InceptionV3 Acc Loss](images/InceptionV3_Acc_Loss.png) ![InceptionV3_Train_On Acc Loss](images/InceptionV3Train_On_Acc_Loss.png)
+![Xception Acc Loss](images/Xception_Acc_Loss.png) ![Xception Train_On_Acc Loss](images/XceptionTrain_On_Acc_Loss.png)
+![ConvNeXtBase Acc Loss](images/ConvNeXtBase_Acc_Loss.png) ![ConvNeXtBase_Train_On Acc Loss](images/ConvNeXtBaseTrain_On_Acc_Loss.png)
+
+### 🍖💪👀 Backbones with Training Off/ On Insights
+
+
 
