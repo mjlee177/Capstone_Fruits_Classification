@@ -282,6 +282,8 @@ The tuned MobileNetV2 model reached **96% test accuracy** with hyperparameters:
 
 ### 🍖💪 Backbone Models with Training On
 
+The purpose of this excercise is to see if having training on will fix the low validation accuracies and for visualization of the difference between training off and on.  If we happen to get a better result with training on, we can optimize that model and call it our new "best".
+
 Settings:
 - batch size = 32
 - image size = 256 x 256
@@ -290,11 +292,11 @@ Settings:
 - optimizer = Adam
 - loss = sparse_categorical_crossentropy
 - dropout = 0.5
-- **epochs = 50**
+- epochs = 50
 
 #### 🍖💪🔢 Backbones with Training Off/ On, Summary Tables
 
-Training Off (20 epochs)
+Training Off
 | Model            | Max Train Accuracy | Median Train Accuracy | Max Val Accuracy | Median Val Accuracy | Training Time (min) |
 |------------------|--------------------|------------------------|------------------|----------------------|----------------------|
 | MobileNetV2      | 0.8703             | 0.8628                 | 0.920            | 0.8950               | 4.80                 |
@@ -305,17 +307,18 @@ Training Off (20 epochs)
 | Xception         | 0.8882             | 0.8808                 | 0.905            | 0.8800               | 6.09                 |
 | ConvNeXtBase     | 0.7812             | 0.7703                 | 0.810            | 0.7925               | 15.09                |
 
-Training On (50 epochs)
+Training On
 
-| Model             | Max Train Accuracy | Median Train Accuracy | Max Val Accuracy | Median Val Accuracy | Training Time (min) |
-|-------------------|--------------------|------------------------|------------------|----------------------|----------------------|
-| MobileNetV2       | 0.9947             | 0.9785                 | 0.895            | 0.7725               | 12.18                |
-| EfficientNetV2B0  | 0.9940             | 0.9839                 | 0.500            | 0.2075               | 13.06                |
-| ResNet152V2       | 0.9978             | 0.9797                 | 0.815            | 0.7675               | 33.08                |
-| EfficientNetB7    | 0.9955             | 0.9852                 | 0.875            | 0.2550               | 53.64                |
-| InceptionV3       | 0.9948             | 0.9845                 | 0.910            | 0.8725               | 15.10                |
-| Xception          | 0.9954             | 0.9880                 | 0.920            | 0.8900               | 18.89                |
-| ConvNeXtBase      | 0.2077             | 0.2003                 | 0.200            | 0.2000               | 89.71                |
+| Model            | Max Train Accuracy | Median Train Accuracy | Max Val Accuracy | Median Val Accuracy | Training Time (min) |
+|------------------|--------------------|------------------------|------------------|----------------------|----------------------|
+| MobileNetV2      | 0.9709             | 0.9427                 | 0.765            | 0.4650               | 8.55                 |
+| EfficientNetV2B0 | 0.9860             | 0.9690                 | 0.375            | 0.2050               | 6.84                 |
+| ResNet152V2      | 0.9625             | 0.8659                 | 0.790            | 0.7025               | 15.02                |
+| EfficientNetB7   | 0.9826             | 0.9718                 | 0.695            | 0.2150               | 26.21                |
+| InceptionV3      | 0.9769             | 0.9364                 | 0.895            | 0.8200               | 7.04                 |
+| Xception         | 0.9890             | 0.9706                 | 0.925            | 0.8850               | 8.90                 |
+| ConvNeXtBase     | 0.2046             | 0.1997                 | 0.200            | 0.2000               | 37.63                |
+
 
 ### 🍖💪📈📉 Backbone Models with Training Off/On, Loss and Accuracy
 
@@ -336,5 +339,13 @@ ConvNeXtBase
 
 ### 🍖💪👀 Backbones with Training Off/ On Insights
 
+- Training Off/ On Table
 
+ - All **median validation accuracies are higher** for the **training off** models, except Xception, which is 0.5% higher
+ - This is due to the **training off models** being able to **generalize better** since they've been trained on 1,000 different categories and 14M images
+ - Even with **training on** and **epochs = 50**, the EffiecientNet median validation accuracy was stuck around 20%.  Actually, ConvNeXtBase fell victim to the same phenomenon
+ - As expected, with **training on**, the training time goes up for every model.  It takes longer to train from scratch.
 
+- Loss and Accuracy charts
+ - You can really see the benefit of leaving **training off** from **where the validation accuracy** starts at the very first epoch.  For **training off** (top charts), tthe whole validcation accuracy line gets a head start at a higher value.
+ - 
