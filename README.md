@@ -1,4 +1,4 @@
-# Capstone_Fruits_Classification
+# 🍎🍌🍇🥭🍓 Capstone_Fruits_Classification
 
 ## Author
 
@@ -97,9 +97,20 @@ Finally, we generate bar chart counts to ensure each fruit has the proper # and 
 
 ## Modeling
 
-### Baseline Model (Conv2D, 256 px)
+### 🤖 Baseline Model (Conv2D, 256 px)
 
-For the baseline model, we took a look at <i> [Deep Learning](https://www.amazon.com/Deep-Learning-Python-Francois-Chollet/dp/1617294438) </i> by Francois Chollet to assist with layers of Conv2D/Maxpooling2D.  Layers shown here:
+For the baseline model, we took a look at <i> [Deep Learning](https://www.amazon.com/Deep-Learning-Python-Francois-Chollet/dp/1617294438) </i> by Francois Chollet to assist with layers of Conv2D/Maxpooling2D.  
+
+Model settings:
+- batch size = 32
+- image size = 256 x 256
+- seed = 42
+- optimizer = "Adam"
+- loss = sparse_categorical_crossentropy
+- dropout = none
+- epochs = 20
+
+Layers shown here:
 
 | Layer (type)              | Output Shape           | Param #     |
 |---------------------------|------------------------|-------------|
@@ -125,16 +136,27 @@ The resulting training and validation accuracies and losses are shown below:
 
 ![Conv2D 256px Acc Loss](images/Conv2D_256_pix_Acc_Loss.png)
 
-We observe:
+#### 🤖👀 Baseline Model Insights
+
 - The model is clearly subject to overfitting.  The evidence is at epoch = 2. At these locations:
   - the Validation Accuracy hits a plateua
   - Train Accuracy passes up Validation Accuracy at subsequent epochs
   - Validation Loss begins increasing rapidly  
 - The Validation Accuracy hits a plateau starting at Epoch 2 and has a value of 62%.  Not a very good result.<br>
 
+#### 🤖✅ Baseline Model Actionable Items
 Let's try an input shape of 128 pixels and Dropout(0.5) and see if that improves overfitting.
 
-### Revised Baseline Model (Conv2D, 128 px, dropout = 0.5)
+### 🤖➕ Revised Baseline Model (Conv2D, 128 px, dropout = 0.5)
+
+Model settings:
+- batch size = 32
+- **image size = 128 x 128**
+- seed = 42
+- optimizer = "Adam"
+- loss = sparse_categorical_crossentropy
+- **dropout = 0.5**
+- epochs = 20
 
 Layers:
 
@@ -163,13 +185,23 @@ Layers:
 
  ![Conv2D 128px Acc Loss](images/Conv2D_128_pix_Acc_Loss.png)
 
- Observations:
+ #### 🤖➕👀 Revised Baseline Model Insights
 - decreasing to 128 pixels and adding Dropout(0.5) reduced overfitting
 - the Validation Accuracy only peaked at around 75%, still not a good result
 
-### Backbone (Pre-trained) Models
+### 🍖 Backbone (Pre-trained) Models
 
-We run each model in a loop.  We end up with this summary table:
+We run each model in a loop with the following settings:
+- batch size = 32
+- image size = 256 x 256
+- seed = 42
+- trainable = False
+- optimizer = Adam
+- loss = sparse_categorical_crossentropy
+- dropout = 0.5
+- epochs = 20
+
+We end up with this summary table:
 
 | Model            | Max Train Accuracy | Median Train Accuracy | Max Val Accuracy | Median Val Accuracy | Training Time (min) |
 |------------------|--------------------|------------------------|------------------|----------------------|----------------------|
@@ -191,10 +223,10 @@ and these accuracy and loss plots:
 ![Xception Acc Loss](images/Xception_Acc_Loss.png)
 ![ConvNeXtBase Acc Loss](images/ConvNeXtBase_Acc_Loss.png)
 
-Observations:
-- Overfitting
+#### 🍖👀 Backbone Models Insights
+- No overfitting
   - All of the models had Validation Accuracy at or above Training Accuracy, so we aren't concerned about overfitting
-- Median Valitation Accuracy
+- Median valitation accuracy
  - The best metric for evaluating these models is the **Median Validation Accuracy**
  - As we saw before, the Training Accuracy can be subject to overfitting, so Validation Accuracy is more appropriate
  - Since the Validation Accuracies show plateus, the median values will tell the best story of what the model delivers consistently
@@ -202,14 +234,63 @@ Observations:
    -  **MobileNetV2** had a **maximum Validation Accuracy of 92%**
  - Not far behinda are InceptionV3, Xception, and Resnet152V2 with median Training Accuracies of 89.5%, 88.5%, and 88.5%, respectively
  - The poorest models were the EfficientNet variants (EfficientNetV2B0 and EfficienNetB7) which hovered around median Validation Accuracy = 21%
-- Training Time
+- Training time
  - All of the models trained at around 5 minutes, except EfficientNetB7 took about 8 1/2 minutes.
 - Some burning questions we will try to answer next:
- - Why were EfficientNet models so poor?  
-   - Since we have training off, none of these models are actually learning.  Without learning, the models are limted to their original training dataset
-     - Let's run models with training on to test this theory
-   - The dataset is similar to ImageNet, which has 20 fruit classes.  4/5 fruit classes in EfficientNet overlap with this Kaggle dataset: bananas, apples, strawberries, and mangoes (grapes are missing).  
-     - So, why isn't the accuracy 4/5 or 80%?  
+ - Why were EfficientNet models so poor?
+   - All of the models were trained on imagenet, which has 20 fruit classes.  4/5 fruit classes overlap with this Kaggle dataset: bananas, apples, strawberries, and mangoes (grapes are missing).  
+     - So, why isn't the accuracy 4/5 or 80%?
        - Let's create a Confusion Matrix to see what is happening
  - Why was EfficientNetB7 so slow compared to the other backbones?
    - EfficientNetB7 is setup to use larger images (600 x 600) than the other models and is trained on more parameters.
+
+#### 🍖✅  Backbone Models Actionable Items
+- Hypertuning for the best model: MobileNetV2
+- Test models with training = True
+- Investigate poor (~20%) accuracies for EfficientNet
+ - Confusion Matrix
+ - View some examples of mis-labeled fruits
+
+### 🛠️📱 Hypertuning for MobileNet
+
+Hypertuning was performed on MobileNetV2 with hyperparameters dropout, units, and learning rate tuned.  Settings
+- batch size = 32
+- image size = 256 x 256
+- seed = 42
+- trainable = False
+- optimizer = Adam
+ - learning rate = [1e-2, 1e-3, 1e-4, 1e-5] 
+- loss = sparse_categorical_crossentropy
+- dropout = [ 0.3, 0.4, 0.5, 0.6, 0.7]
+- units = [64, 128, 192, 256, 320, 384, 448, 512]
+- epochs = 20
+
+The tuned MobileNetV2 model reached **96% test accuracy** with hyperparameters:
+- dropout = 0.3
+- units = 384
+- learning rate = 0.0001
+
+Accuracy and loss plots:
+
+![Tuned MobileNetV2 Acc Loss](images/Tuned_MobileNet_Acc_Loss.png)
+
+#### 🛠️📱👀 Hypertuning for MobileNet Insights
+- a **96% test accuracy score** was achieved
+- a large dropout was not necessary, 0.3 was optimal
+- 384 units was optimal, I was expecting 256 since it is closest to the 224 input size for MobileNet
+- the optimal learning rate of 1e-4 was interesting and I did not know what to expect.  A more refined learning rate would probably have eventually been better, but I limited epochs to 50, so perhaps 1e-5 would have been better at a larger epoch limit.
+
+### 🍖💪 Backbone Models with Training On
+
+Settings:
+- batch size = 32
+- image size = 256 x 256
+- seed = 42
+- **trainable = True**
+- optimizer = Adam
+- loss = sparse_categorical_crossentropy
+- dropout = 0.5
+- epochs = 20
+
+  
+
