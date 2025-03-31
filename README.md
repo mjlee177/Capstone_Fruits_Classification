@@ -215,7 +215,7 @@ Layers:
 
 #### 2.2.1 🤖➕📈📉 Revised Baseline Model, Losses and Accuracies:
 
- ![Conv2D 128px Acc Loss](images/Conv2D_128_pix_Acc_Loss.png)
+ ![Conv2D 128px Acc Loss](images/Conv2D_128_pix_Acc_Loss1.png)
 
  #### 2.2.2 🤖➕👀 Revised Baseline Model Insights
 - Decreasing to 128 pixels and adding Dropout(0.5) reduced overfitting
