@@ -164,7 +164,7 @@ Layers shown here:
  Trainable params: 9,370,181 (35.74 MB)
  Non-trainable params: 0 (0.00 B)
 
-#### 2.1.1 📈📉 The resulting training and validation losses and accuracies are shown below:
+#### 2.1.1 🤖📈📉 The baseline model training and validation losses and accuracies are shown below:
 
 ![Conv2D 256px Acc Loss](images/Conv2D_256_pix_Acc_Loss1.png)
 
