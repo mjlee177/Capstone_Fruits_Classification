@@ -260,18 +260,18 @@ We run each model in a loop with the following settings:
 - No overfitting
   - All of the models had Validation Accuracy at or above Training Accuracy, so we aren't concerned about overfitting
 - Median valitation accuracy
- - The best metric for evaluating these models is the **Median Validation Accuracy**
- - As we saw before, the Training Accuracy can be subject to overfitting, so Validation Accuracy is more appropriate
- - Since the Validation Accuracies show plateus, the median values will tell the best story of what the model delivers consistently
- - The **highest median Training Accuracy** was achieved with **MobileNetV2** with a value of **90%**
-   -  **MobileNetV2** had a **maximum Validation Accuracy of 92%**
- - Not far behinda are InceptionV3, Xception, and Resnet152V2 with median Validaion Accuracies of 89.5%, 88.5%, and 88.0%, respectively
- - The poorest models were the EfficientNet variants (EfficientNetV2B0 and EfficienNetB7) which hovered around median Validation Accuracy = 21%
+  - The best metric for evaluating these models is the **Median Validation Accuracy**
+  - As we saw before, the Training Accuracy can be subject to overfitting, so Validation Accuracy is more appropriate
+  - Since the Validation Accuracies show plateus, the median values will tell the best story of what the model delivers consistently
+  - The **highest median Training Accuracy** was achieved with **MobileNetV2** with a value of **90%**
+    -  **MobileNetV2** had a **maximum Validation Accuracy of 92%**
+  - Not far behinda are InceptionV3, Xception, and Resnet152V2 with median Validaion Accuracies of 89.5%, 88.5%, and 88.0%, respectively
+  - The poorest models were the EfficientNet variants (EfficientNetV2B0 and EfficienNetB7) which hovered around median Validation Accuracy = 21%
 - Training time
  - All of the models trained at around 5 minutes, except EfficientNetB7 took about 8 1/2 minutes.
 - Some burning questions we will try to answer next:
  - Why were EfficientNet models so poor?
-   - All of the models were trained on imagenet, which has 20 fruit classes.  4/5 fruit classes overlap with this Kaggle dataset: bananas, apples, strawberries, and mangoes (grapes are missing).  
+  - All of the models were trained on imagenet, which has 20 fruit classes.  4/5 fruit classes overlap with this Kaggle dataset: bananas, apples, strawberries, and mangoes (grapes are missing).  
      - So, why isn't the accuracy 4/5 or 80%?
        - Let's create a Confusion Matrix to see what is happening
        - Let's also look at some mis-classification cases to visualize results
@@ -459,4 +459,4 @@ We adjust the settings so that the image size is the ideal 224 for EfficientNetV
   - The model predicted 110 strawberries, 17 of which were correct
 - Mislabeled fruits pictures
  - I can see that maybe the prediction of grape from what really is a mango could be because these mangos are in bunches, similar to grapes
-  - Looking at bananas predicted to be stawberries - I really have no clue, except maybe the outlines of grouped up bananas  are shaped similar to a strawberry
+ - Looking at bananas predicted to be stawberries - I really have no clue, except maybe the outlines of grouped up bananas  are shaped similar to a strawberry
