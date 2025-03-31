@@ -348,10 +348,10 @@ The tuned MobileNetV2 model reached **96% test accuracy** with hyperparameters:
 
 ### 3.1 🍖💪 Backbone Models with Training On
 
-The purpose of this excercise is to 
-- See if having training on will fix the low validation accuracies
+The purposes of this excercise are: 
+- To see if having training on will fix the low validation accuracies
 - For visualization of the difference between training off and on
- - If we happen to get a better result with training on, we can optimize that model and call it our new "best"
+  - If we happen to get a better result with training on, we can optimize that model and call it our new "best"
 
 Settings:
 - Batch size = 32
@@ -393,7 +393,7 @@ Training On
  - All **median validation accuracies are higher** for the **training off** models, except Xception, which is 0.5% higher
  - This is due to the **training off models** being able to **generalize better** since they've been trained on 1,000 different categories and 14M images
  - Even with **training on**, the EffiecientNet median validation accuracy was stuck around 20%.  Actually, ConvNeXtBase became a new victim to the same phenomenon
-  - We will take a closer look at EfficientNet and try to see why this happens with a Confusion Matrix
+   - We will take a closer look at EfficientNet and try to see why this happens with a Confusion Matrix
  - As expected, with **training on**, the training time goes up for every model.  It takes longer to train all layers from scratch.
 
 #### 3.1.3 🍖💪📈📉 Backbone Models with Training Off/On, Loss and Accuracy
