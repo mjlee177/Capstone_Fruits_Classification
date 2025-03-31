@@ -335,14 +335,14 @@ The tuned MobileNetV2 model reached **96% test accuracy** with hyperparameters:
  - The optimal learning rate of 1e-4 was interesting and I did not know what to expect.  A more refined learning rate would probably have eventually been better, but I limited epochs to 50, so perhaps 1e-5 would have been better at a larger epoch limit
  - I considered building in an early stop after 5 epochs if validation accuracy was not showing improvement, but ultimately I decided I wanted more data (no early stop)
 - Metrics Table
- - The entire model only missed 4 of the 100 images, so all of the metrics are extremely good
- - Accuracy is probably still the best metric to determine success, but under some scenario where false positives are costly, precision would be best.  Similarly, if the cost of false negatives was high, recall would be best.  F1 is not particularly important in this scenario since the dataset is perfectly balanced
+  - The entire model only missed 4 of the 100 images, so all of the metrics are extremely good
+  - Accuracy is probably still the best metric to determine success, but under some scenario where false positives are costly, precision would be best.  Similarly, if the cost of false negatives was high, recall would be best.  F1 is not particularly important in this scenario since the dataset is perfectly balanced
 - Misclassified Images
- - From observing the misclassified images, it's reasonable why they why they would be identified incorrectly
-  - The first picture is peeled apple so it would be hard for even a human to tell which fruit it is
-  - The second image has apples at angles that make them seem sort of oblong, similar to mangoes
-  - The third picture has apples at strange angles again, making them seem longer
-  - The fourth picture has strawberries piled up, which may resemble the shape of a bunch of grapes
+  - From observing the misclassified images, it's reasonable why they why they would be identified incorrectly
+   - The first picture is peeled apple so it would be hard for even a human to tell which fruit it is
+   - The second image has apples at angles that make them seem sort of oblong, similar to mangoes
+   - The third picture has apples at strange angles again, making them seem longer
+   - The fourth picture has strawberries piled up, which may resemble the shape of a bunch of grapes
 
 ## 3. Extra Investigations
 
