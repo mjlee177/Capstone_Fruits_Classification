@@ -61,8 +61,21 @@ The data is split into 97% training, 2% validation, and 1% testing.  Since there
 
 ## Conclusions
 
-- MobileNetV2 performed the best (90% validation accuracy) among the 7 models, although ResNet152V2, InceptionV3, and Xception were within 2%
-- After hypertuning, a test accuracy of 96% was achieved with MobileNetV2
+| Model            | Max Train Accuracy | Median Train Accuracy | Max Val Accuracy | Median Val Accuracy | Training Time (min) |
+|------------------|--------------------|------------------------|------------------|----------------------|----------------------|
+| MobileNetV2      | 0.8684             | 0.8640                 | 0.910            | 0.900                | 5.00                 |
+| EfficientNetV2B0 | 0.2177             | 0.2126                 | 0.270            | 0.205                | 5.21                 |
+| ResNet152V2      | 0.8773             | 0.8695                 | 0.895            | 0.880                | 5.23                 |
+| EfficientNetB7   | 0.2120             | 0.2070                 | 0.250            | 0.215                | 8.41                 |
+| InceptionV3      | 0.8607             | 0.8578                 | 0.915            | 0.895                | 4.90                 |
+| Xception         | 0.8905             | 0.8822                 | 0.915            | 0.885                | 4.99                 |
+| ConvNeXtBase     | 0.7774             | 0.7706                 | 0.815            | 0.800                | 5.55                 |
+
+- A simple baseline model made up of Conv2D/Maxpool2D layers resulted in a maximum validation accuracy of 75%
+- MobileNetV2 performed the best (90% median validation accuracy) among the 7 models, although ResNet152V2, InceptionV3, and Xception were within 2%
+- After hypertuning dropout, units, and learning rate for MobileNetV2, a **test accuracy of 96%** was achieved
+- Turning training on resulted in overfitting, as the validation accuracy greatly underperformed the training accuracy in most cases.  Up to 20 epochs, the validation accuracies were still not good for most models
+- We investigated why EfficientNet stalled at ~20% validation accuracy, but no conclusions were made after reviewing the confusion matrix and a few misclassified images
 
 ## 1. Exploratory Data Analysis
 
