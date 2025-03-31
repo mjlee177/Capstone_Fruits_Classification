@@ -174,7 +174,7 @@ Layers shown here:
   - The Validation Accuracy hits a plateua
   - Train Accuracy passes up Validation Accuracy at subsequent epochs
   - Validation Loss begins increasing rapidly  
-- The Validation Accuracy hits a plateau starting at Epoch 2 and has a value of 62%.  Not a very good result.<br>
+- The Validation Accuracy hits a plateau starting at Epoch 2 and has a value of 62%.  Not a very good result.
 
 #### 2.1.3 🤖✅ Baseline Model Actionable Items
 Let's try an input shape of 128 pixels and Dropout(0.5) and see if that improves overfitting.
