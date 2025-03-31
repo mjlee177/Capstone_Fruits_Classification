@@ -166,7 +166,7 @@ Layers shown here:
 
 #### 2.1.1 📈📉 The resulting training and validation losses and accuracies are shown below:
 
-![Conv2D 256px Acc Loss](images/Conv2D_256_pix_Acc_Loss.png)
+![Conv2D 256px Acc Loss](images/Conv2D_256_pix_Acc_Loss1.png)
 
 #### 2.1.2 🤖👀 Baseline Model Insights
 
