@@ -18,11 +18,11 @@ Link to this notebook: https://github.com/mjlee177/Capstone_Fruits_Classificatio
 Kaggle dataset link: https://www.kaggle.com/datasets/utkarshsaxenadn/fruits-classification/
 
 The fruits classification dataset is from Kaggle.  It contains 10,000 images with an even number (2,000 each) of 5 different types of fruits:
-- Apples
-- Bananas
-- Grapes
-- Mangoes
-- Strawberries
+- 🍎 Apples
+- 🍌 Bananas
+- 🍇 Grapes
+- 🥭 Mangoes
+- 🍓 Strawberries
 
 The pictures are of various shapes, sizes, colors, and lighting conditions.  Some are pictures taken with a camera, some are computer generated, and some are drawn by hand.  All types of scenes and angles are taken of the fruits, including whole, sliced, peeled, bitten, plucked, on the tree/ vine, and arranged on dishes.  Some pictures even have false colors (like a blue apple) or are in black-and-white.  What is consistent among these images is that the fruits are true to shape, meaning there's no mashed banana, apple sauce, grape juice, or other byproducts.  If there is a picture of a byproduct (e.g. strawberry cake), the fruit is there as well.  Some images are of the full fruit, some are in bunches, some are only partially on the image or some of the fruit is not exactly true to shape because it's dipped in chocolate or something similar.<br>
 
@@ -44,6 +44,10 @@ Banana mostly out of the picture<br>
 The pictures have varying dimensions but all are 96 dpi vertical and horizontal resolution, have 24 bit depth, and are in jpeg format.
 
 The data is split into 97% training, 2% validation, and 1% testing.  Since there is a total of 10,000 pictures, this means that for each of the 5 fruit classes, there are 1940 training, 40 validation, and 20 testing images.  This ensures that distribution of classes is consistent across all three sets and that the model is trained on a representative sample.
+
+## Business Case
+
+The results of this study can provide insights into real world cases where fruits categorization is important.  Fruits identification could be used to improve grocery store checkouts, train robots to handle fruits, farming, 
 
 ## Modeling Plan
 
@@ -73,9 +77,17 @@ The data is split into 97% training, 2% validation, and 1% testing.  Since there
 
 - A simple baseline model made up of Conv2D/Maxpool2D layers resulted in a maximum validation accuracy of 75%
 - MobileNetV2 performed the best (90% median validation accuracy) among the 7 models, although ResNet152V2, InceptionV3, and Xception were within 2%
-- After hypertuning dropout, units, and learning rate for MobileNetV2, a **test accuracy of 96%** was achieved
+- After hypertuning the dropout, units, and learning rates for MobileNetV2, a **test accuracy of 96%** was achieved
 - Turning training on resulted in overfitting, as the validation accuracy greatly underperformed the training accuracy in most cases.  Up to 20 epochs, the validation accuracies were still not good for most models
 - We investigated why EfficientNet stalled at ~20% validation accuracy, but no conclusions were made after reviewing the confusion matrix and a few misclassified images
+
+## Next Steps
+
+- Further investigations can be made into why EfficientNet (with training off) and Xception (with training on) models stalled at 20% validation accuracy
+ - Adjust image pixels and re-run models
+ - Deeper look into the layers in the models
+ - Deeper look into the calculations in the models
+ - Review more examples of misclassification
 
 ## 1. Exploratory Data Analysis
 
@@ -156,7 +168,7 @@ Layers shown here:
 
 ![Conv2D 256px Acc Loss](images/Conv2D_256_pix_Acc_Loss.png)
 
-#### 2.2 🤖👀 Baseline Model Insights
+#### 2.1.2 🤖👀 Baseline Model Insights
 
 - The model is clearly subject to overfitting.  The evidence is at epoch = 2. At these locations:
   - The Validation Accuracy hits a plateua
@@ -164,7 +176,7 @@ Layers shown here:
   - Validation Loss begins increasing rapidly  
 - The Validation Accuracy hits a plateau starting at Epoch 2 and has a value of 62%.  Not a very good result.<br>
 
-#### 2.3 🤖✅ Baseline Model Actionable Items
+#### 2.1.3 🤖✅ Baseline Model Actionable Items
 Let's try an input shape of 128 pixels and Dropout(0.5) and see if that improves overfitting.
 
 ### 2.2 🤖➕ Revised Baseline Model (Conv2D, 128 px, dropout = 0.5)
@@ -201,11 +213,11 @@ Layers:
  Trainable params: 3,078,725 (11.74 MB)
  Non-trainable params: 0 (0.00 B)
 
-#### 2.3 📈📉 Losses and accuracies:
+#### 2.2.1 🤖➕📈📉 Revised Baseline Model, Losses and Accuracies:
 
  ![Conv2D 128px Acc Loss](images/Conv2D_128_pix_Acc_Loss.png)
 
- #### 2.4 🤖➕👀 Revised Baseline Model Insights
+ #### 2.2.2 🤖➕👀 Revised Baseline Model Insights
 - Decreasing to 128 pixels and adding Dropout(0.5) reduced overfitting
 - The Validation Accuracy only peaked at around 75%, still not a good result
 
@@ -221,7 +233,7 @@ We run each model in a loop with the following settings:
 - Dropout = 0.5
 - Epochs = 20
 
-🔢 We end up with this summary table:
+#### 2.3.1 🍖🔢 Backbone Models Results Summary Table:
 
 | Model            | Max Train Accuracy | Median Train Accuracy | Max Val Accuracy | Median Val Accuracy | Training Time (min) |
 |------------------|--------------------|------------------------|------------------|----------------------|----------------------|
@@ -233,7 +245,7 @@ We run each model in a loop with the following settings:
 | Xception         | 0.8905             | 0.8822                 | 0.915            | 0.885                | 4.99                 |
 | ConvNeXtBase     | 0.7774             | 0.7706                 | 0.815            | 0.800                | 5.55                 |
 
-#### 📈📉 Loss and accuracy plots:
+#### 2.3.2 🍖📈📉 Backbone Models, Loss and Accuracy Plots:
 
 ![MobileNetV2 Acc Loss](images/MobileNetV2_Acc_Loss.png)
 ![EfficientNetV2B0 Acc Loss](images/EfficientNetV2B0_Acc_Loss.png)
@@ -243,7 +255,7 @@ We run each model in a loop with the following settings:
 ![Xception Acc Loss](images/Xception_Acc_Loss.png)
 ![ConvNeXtBase Acc Loss](images/ConvNeXtBase_Acc_Loss.png)
 
-#### 🍖👀 Backbone Models Insights
+#### 2.3.3 🍖👀 Backbone Models Insights
 
 - No overfitting
   - All of the models had Validation Accuracy at or above Training Accuracy, so we aren't concerned about overfitting
@@ -266,7 +278,7 @@ We run each model in a loop with the following settings:
  - Why was EfficientNetB7 so slow compared to the other backbones?
    - EfficientNetB7 is setup to use larger images (600 x 600) than the other models and is trained on more parameters (no further analysis needed)
 
-#### 🍖✅  Backbone Models Actionable Items
+#### 2.3.4 🍖✅  Backbone Models Actionable Items
 
 - Hypertuning for the best model: MobileNetV2
 - Test models with training = True
@@ -274,7 +286,7 @@ We run each model in a loop with the following settings:
  - Confusion Matrix
  - View some examples of mis-labeled fruits
 
-### 🛠️📱 Hypertuning for MobileNet
+### 2.4 🛠️📱 Hypertuning for MobileNet
 
 Hypertuning was performed on MobileNetV2 with hyperparameters dropout, units, and learning rate tuned.  Settings
 - Batch size = 32
@@ -293,11 +305,11 @@ The tuned MobileNetV2 model reached **96% test accuracy** with hyperparameters:
 - Units = 384
 - Learning rate = 0.0001
 
-#### 🛠️📱📈📉 Hypertuned MobileNet, Loss and Accuracy Plots:
+#### 2.4.1 🛠️📱📈📉 Hypertuned MobileNet, Loss and Accuracy Plots:
 
 ![Tuned MobileNetV2 Acc Loss](images/Tuned_MobileNet_Acc_Loss.png)
 
-#### 🛠️📱🔢 Hypertuned MobileNet, Metrics Table: Precision, Recall, F1-Score
+#### 2.4.2 🛠️📱🔢 Hypertuned MobileNet, Metrics Table: Precision, Recall, F1-Score
 
 | Class       | Precision | Recall | F1-Score | Support |
 |-------------|-----------|--------|----------|---------|
@@ -307,15 +319,15 @@ The tuned MobileNetV2 model reached **96% test accuracy** with hyperparameters:
 | Mango       | 0.8696    | 1.0000 | 0.9302   | 20      |
 | Strawberry  | 1.0000    | 0.9500 | 0.9744   | 20      |
 
-#### 🛠️📱🔢 Hypertuned MobileNet, Confusion Matrix
+#### 2.4.3 🛠️📱🔢 Hypertuned MobileNet, Confusion Matrix
 
 ![Best MobileNetV2 ConfMatrix](images/Best_MobileNet_ConfMatrix.png)
 
-#### 🛠️📱 Hypertuned MobileNet, Misclassified Images
+#### 2.4.4 🛠️📱❌📷 Hypertuned MobileNet, Misclassified Images
 
 ![Best MobileNetV2 Misclassified Images](images/Best_MobileNet_Mislabeled.png)
 
-#### 🛠️📱👀 Hypertuning for MobileNet Insights
+#### 2.4.5 🛠️📱👀 Hypertuning for MobileNet Insights
 
 - A **96% test accuracy score** was achieved
  - A large dropout was not necessary, 0.3 was optimal
@@ -332,9 +344,9 @@ The tuned MobileNetV2 model reached **96% test accuracy** with hyperparameters:
   - The third picture has apples at strange angles again, making them seem longer
   - The fourth picture has strawberries piled up, which may resemble the shape of a bunch of grapes
 
-## Extra Investigations
+## 3. Extra Investigations
 
-### 🍖💪 Backbone Models with Training On
+### 3.1 🍖💪 Backbone Models with Training On
 
 The purpose of this excercise is to 
 - See if having training on will fix the low validation accuracies
@@ -349,9 +361,9 @@ Settings:
 - Optimizer = Adam
 - Loss = sparse_categorical_crossentropy
 - Dropout = 0.5
-- Epochs = 50
+- Epochs = 20
 
-#### 🍖💪🔢 Backbones with Training Off/ On, Summary Tables
+#### 3.1.1 🍖💪🔢 Backbones with Training Off/ On, Summary Tables
 
 Training Off
 | Model            | Max Train Accuracy | Median Train Accuracy | Max Val Accuracy | Median Val Accuracy | Training Time (min) |
@@ -376,7 +388,7 @@ Training On
 | Xception         | 0.9890             | 0.9706                 | 0.925            | 0.8850               | 8.90                 |
 | ConvNeXtBase     | 0.2046             | 0.1997                 | 0.200            | 0.2000               | 37.63                |
 
-#### 🍖💪🔢👀 Backbones with Training Off/ On, Table Insights
+#### 3.1.2 🍖💪🔢👀 Backbones with Training Off/ On, Table Insights
 
  - All **median validation accuracies are higher** for the **training off** models, except Xception, which is 0.5% higher
  - This is due to the **training off models** being able to **generalize better** since they've been trained on 1,000 different categories and 14M images
@@ -384,7 +396,7 @@ Training On
   - We will take a closer look at EfficientNet and try to see why this happens with a Confusion Matrix
  - As expected, with **training on**, the training time goes up for every model.  It takes longer to train all layers from scratch.
 
-#### 🍖💪📈📉 Backbone Models with Training Off/On, Loss and Accuracy
+#### 3.1.3 🍖💪📈📉 Backbone Models with Training Off/On, Loss and Accuracy
 
 MobileNetV2
 ![MobileNetV2 Acc Loss](images/MobileNetV2_Acc_Loss.png) ![MobileNetV2 Train_On_Acc Loss](images/MobileNetV2Train_On_Acc_Loss.png)
@@ -401,12 +413,50 @@ Xception
 ConvNeXtBase
 ![ConvNeXtBase Acc Loss](images/ConvNeXtBase_Acc_Loss.png) ![ConvNeXtBase_Train_On Acc Loss](images/ConvNeXtBaseTrain_On_Acc_Loss.png)
 
-#### 🍖💪📈📉👀 Backbones with Training Off/On, Loss and Accuracy Insights
+#### 3.1.4 🍖💪📈📉👀 Backbones with Training Off/On, Loss and Accuracy Insights
 
  - You can really see the benefit of leaving **training off** from **where the validation accuracy** starts at the very first epoch.  For **training off** (top charts), every validcation accuracy line gets a head start (epoch = 0) at a higher value.
  - Overfitting was present in the **training on** cases
  - As was pointed out previously, for **training on** EfficientNet and ConvNeXtBase only reached ~20% accuracies
  - With **training on**, the Training Accuracies consistenly reached higher final values (except ConvNeXtBase), showing these models' capability to train better to the given data with **training on**
- - 
 
+### 3.2 ⚡ A Closer Look int EfficientNet
 
+We want to investigate why EfficientNet models were stuck around 20% validation accuracy.
+
+We adjust the settings so that the image size is the ideal 224 for EfficientNetV2B0.  Settings:
+- Batch size = 32
+- **Image size = 224 x 224** - changed
+- Seed = 42
+- Trainable = False
+- Optimizer = Adam
+- Loss = sparse_categorical_crossentropy
+- Dropout = 0.5
+- Epochs = 20
+
+#### 3.2.1 EfficientNetV2B0 Confusion Matrix
+
+![EfficientNetV2B0 Confusion Matrix](images/EfficientNetV2B0_CMatrix.png)
+
+#### 3.2.2 ⚡❌📷 EfficientNetV2B0 Misclassified Images Examples
+
+![EfficientNetV2B0 BananasNotStraw](images/EfficientNetV2B0_BananasNotStraw.png)
+![EfficientNetV2B0 MangosNotGrapes](images/EfficientNetV2B0_MangosNotGrapes.png)
+
+#### 3.2.3 EfficientNetV2B0 Insights
+
+- **Conclusion: the confusion matrix gives us more information, but there is no story as to why the EfficientNet model mis-categorized items.  A deeper look into the exact original training pictures and matching them to passed/ failed matches in this analysis is warranted, but out-of-scope for this paper**
+- Values shown are for the last epoch = 20.  We expect validation accuracy = 23.5%
+- The values along top-left to bottom-right diagonal are the ones that the model got correct
+- 3 grapes, 20 mangos, and 24 strawberries were correct, 47 total
+- The total validation set is 40 per fruit x 5 fruits = 200
+- For this result we are getting 47/200 or 23.5%
+- Though we can now see the exact mislabelings, it's not particularly helpful with generating a story
+  - The model predicted 0 apples and 0 bananas
+  - The model predicted 10 grapes, 3 were correct
+    - Since grapes were not in the original training dataset I expected it to predict 0, but that is not the case
+  - The model predicted 80 mangoes, 20 of which were correct
+  - The model predicted 110 strawberries, 17 of which were correct
+- Mislabeled fruits pictures
+ - I can see that maybe the prediction of grape from what really is a mango could be because these mangos are in bunches, similar to grapes
+  - Looking at bananas predicted to be stawberries - I really have no clue, except maybe the outlines of grouped up bananas  are shaped similar to a strawberry
