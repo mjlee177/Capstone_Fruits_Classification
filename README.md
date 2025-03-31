@@ -84,10 +84,10 @@ The results of this study can provide insights into real world cases where fruit
 ## Next Steps
 
 - Further investigations can be made into why EfficientNet (with training off) and Xception (with training on) models stalled at 20% validation accuracy
- - Adjust image pixels and re-run models
- - Deeper look into the layers in the models
- - Deeper look into the calculations in the models
- - Review more examples of misclassification
+  - Adjust image pixels and re-run models
+  - Deeper look into the layers in the models
+  - Deeper look into the calculations in the models
+  - Review more examples of misclassification
 
 ## 1. Exploratory Data Analysis
 
