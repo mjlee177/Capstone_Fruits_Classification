@@ -47,7 +47,7 @@ The data is split into 97% training, 2% validation, and 1% testing.  Since there
 
 ## Business Case
 
-The results of this study can provide insights into real world cases where fruits categorization is important.  Fruits identification could be used to improve grocery store checkouts, train robots to handle fruits, farming, 
+The results of this study can provide insights into real world cases where fruits categorization is important.  Fruits identification could be used to improve grocery store checkouts, train robots to handle fruits, or sorting fruits at a warehouse, grocery store, or farm.
 
 ## Modeling Plan
 
